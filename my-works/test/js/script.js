@@ -14,7 +14,7 @@ document.querySelectorAll('.navbar-nav a').forEach(anchor => {
 
 // Activate navigation links on scroll
 window.addEventListener('scroll', () => {
-    let fromTop = window.scrollY + 80; // Offset for fixed navbar
+    let fromTop = window.scrollY + 60; // Offset for fixed navbar
     document.querySelectorAll('.navbar-nav a').forEach(link => {
         let section = document.querySelector(link.getAttribute('href'));
         if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
