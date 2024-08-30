@@ -1,0 +1,156 @@
+/* Navigation Bar */
+.nav-bg {
+    background-color: #080707; /* Darker than bg-dark */
+    color: #f8f9fa;
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url('../img/hero-background.png'); /* Replace with your image */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding-top: 60px; /* Offset to account for fixed navbar */
+}
+
+.profile-picture {
+    width: 100%;
+    max-width: 250px;
+}
+
+/* Blurred Content Card */
+.blur-card {
+    background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Line Break Under Section Titles */
+.title-underline {
+    width: 50px;
+    height: 3px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 1px;
+}
+
+.underline-dark {
+    background-color: #343a40;
+}
+
+.underline-light {
+    background-color: #f8f9fa;
+}
+
+/* About Me Section */
+.about-me h2,
+.about-me p {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.about-me h3 {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+/* Personal Information */
+.personal-info {
+    display: table;
+    width: 100%;
+}
+
+.info-row {
+    display: table-row;
+    margin-bottom: 10px; /* Space between rows */
+}
+
+.info-label, .info-value {
+    display: table-cell;
+    padding: 5px 0;
+}
+
+.info-label {
+    width: 25%; /* Adjust width to control label spacing */
+    text-align: left;
+}
+
+.info-value {
+    width: 75%; /* Adjust width for the value part */
+    text-align: left;
+}
+
+.star-rating .fas {
+    color: #ffc107; /* Star color */
+}
+
+.star-rating .far {
+    color: #e4e5e9; /* Empty star color */
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    background-image: url('../img/portfolio-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.portfolio-section .card-img-top {
+    border-radius: 15px 15px 0 0;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: #343a40; /* Bootstrap dark color */
+    color: #f8f9fa; /* Bootstrap light color */
+}
+
+/* Form Controls for Contact Section */
+.contact-section .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #f8f9fa;
+    border: 1px solid #6c757d;
+}
+
+.contact-section .form-control::placeholder {
+    color: #ced4da;
+}
+
+.contact-section .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #f8f9fa;
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+/* Footer Section */
+.footer-section {
+    background-color: #080707; /* Darker than bg-dark */
+    color: #f8f9fa;
+}
+
+.footer-section .footer-links a {
+    color: #f8f9fa;
+    text-decoration: none;
+}
+
+.footer-section .footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-section .social-icons a {
+    font-size: 1.25rem;
+}
+
+.footer-section .social-icons a:hover {
+    color: #007bff; /* Bootstrap primary color */
+}
