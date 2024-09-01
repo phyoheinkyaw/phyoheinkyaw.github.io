@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISP Details - ISP Marketing Platform</title>
+
+    <!-- Favicon and Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/img/favicon/favicon.ico">
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- FontAwesome CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="bg-dark text-white">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/img/isp.png" alt="ISP Logo" style="height: 40px;">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="all-isp.html">All ISP</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="signup.html">Sign Up</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ISP Details Section -->
+    <section class="isp-details-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-fluid" src="assets/img/company.jpg" alt="ISP Company">
+                </div>
+                <div class="col-md-8">
+                    <h2 class="display-4">ISP Company Name</h2>
+                    <p class="lead">High speed internet starting at $50/month.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto, corporis. Soluta molestias
+                        quasi quos. Doloremque, amet.</p>
+                    <ul class="list-unstyled details-list">
+                        <li>
+                            <span class="details-label">Available Speeds:</span>
+                            <span>100 Mbps, 200 Mbps, 500 Mbps</span>
+                        </li>
+                        <li>
+                            <span class="details-label">Customer Support:</span>
+                            <span>24/7 via phone and email</span>
+                        </li>
+                        <li>
+                            <span class="details-label">Contract Length:</span>
+                            <span>No contract required</span>
+                        </li>
+                        <li>
+                            <span class="details-label">Availability:</span>
+                            <span>Nationwide</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4">
+                        <button class="btn btn-success bookAppointmentButton" data-toggle="modal" data-target="#appointmentModal">
+                            <i class="fas fa-calendar-check"></i> Book Appointment
+                        </button>                       
+                        <a href="#" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                            title="Contact ISP">
+                            <i class="fas fa-envelope"></i> Contact ISP
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- More Information Section -->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <h3>More Information</h3>
+
+                    <!-- Current Promotions Section -->
+                    <div class="promotions mt-3">
+                        <h4>Current Promotions</h4>
+                        <ul>
+                            <li><strong>50% off</strong> on all plans for the first 3 months</li>
+                            <li><strong>Free installation</strong> for new customers</li>
+                            <li><strong>Upgrade</strong> to a higher speed plan at no additional cost for the first 6
+                                months</li>
+                        </ul>
+                    </div>
+
+                    <!-- Pricing Table Section -->
+                    <div class="pricing mt-4">
+                        <h4>Pricing Plans</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Plan</th>
+                                    <th>Speed</th>
+                                    <th>Price per Month</th>
+                                    <th>Features</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Basic</td>
+                                    <td>100 Mbps</td>
+                                    <td>$50</td>
+                                    <td>Unlimited Data, 24/7 Customer Support</td>
+                                </tr>
+                                <tr>
+                                    <td>Standard</td>
+                                    <td>200 Mbps</td>
+                                    <td>$70</td>
+                                    <td>Unlimited Data, 24/7 Customer Support, Free Modem</td>
+                                </tr>
+                                <tr>
+                                    <td>Premium</td>
+                                    <td>500 Mbps</td>
+                                    <td>$100</td>
+                                    <td>Unlimited Data, 24/7 Customer Support, Free Modem, Free Router</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Reviews Section -->
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h3 class="mb-4">Customer Reviews</h3>
+
+                    <!-- Review 1 -->
+                    <div class="media mb-2">
+                        <img src="assets/img/male.png" alt="Profile Picture" class="mr-3 rounded-circle"
+                            style="width: 64px; height: 64px;">
+                        <div class="media-body">
+                            <h5 class="mt-0">John Doe</h5>
+                            <div class="mb-2">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i> <!-- 4.5 Stars -->
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum nulla ac
+                                tincidunt malesuada.</p>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="media mb-2">
+                        <img src="assets/img/male.png" alt="Profile Picture" class="mr-3 rounded-circle"
+                            style="width: 64px; height: 64px;">
+                        <div class="media-body">
+                            <h5 class="mt-0">Jane Smith</h5>
+                            <div class="mb-2">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="far fa-star text-warning"></i> <!-- 4 Stars -->
+                            </div>
+                            <p>Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis
+                                porta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora praesentium
+                                accusamus nam dignissimos, ex illum ipsam facere placeat exercitationem nisi nihil
+                                cupiditate nostrum temporibus expedita ipsum voluptatem aut deserunt voluptates!</p>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="media mb-2">
+                        <img src="assets/img/female.png" alt="Profile Picture" class="mr-3 rounded-circle"
+                            style="width: 64px; height: 64px;">
+                        <div class="media-body">
+                            <h5 class="mt-0">Alice Johnson</h5>
+                            <div class="mb-2">
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star text-warning"></i>
+                                <i class="fas fa-star-half-alt text-warning"></i>
+                                <i class="far fa-star text-warning"></i> <!-- 3.5 Stars -->
+                            </div>
+                            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                                sollicitudin.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Booking Modal -->
+    <div class="modal fade" id="appointmentModal" tabindex="-1" role="dialog" aria-labelledby="appointmentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="appointmentModalLabel">Book an Appointment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="appointmentForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="text" class="form-control" id="phone" placeholder="Enter your phone number"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address</label>
+                            <textarea class="form-control" id="address" placeholder="Enter your address" rows="3" required></textarea>
+                        </div>                        
+                        <div class="form-group">
+                            <label for="appointmentDate">Appointment Date</label>
+                            <input type="date" class="form-control" id="appointmentDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fileUpload">KPay Screenshot</label>
+                            <input type="file" class="form-control-file" id="fileUpload" accept="image/*"
+                                onchange="previewImage(event)" required>
+                            <img id="imagePreview" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" form="appointmentForm">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-2">
+        <div class="container text-center pt-4">
+            <p>&copy; 2024 ISP Marketing Platform. All rights reserved.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#" class="text-white">Privacy Policy</a></li>
+                <li class="list-inline-item"><a href="#" class="text-white">Terms of Service</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- JQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

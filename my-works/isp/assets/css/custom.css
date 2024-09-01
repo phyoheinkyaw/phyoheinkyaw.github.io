@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+*{
+    font-family: "Ubuntu", sans-serif;
+}
+
+body{
+    padding-top: 56px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.details-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 5px 10px;
+    align-items: start;
+}
+
+.details-list li {
+    display: contents; /* Allows items to be in the same grid structure */
+}
+
+.details-label {
+    font-weight: bold;
+    white-space: nowrap; /* Prevents label text from wrapping */
+}
+
+.media img {
+    object-fit: cover;
+}
+
+.media-body h5 {
+    font-weight: bold;
+}
+
+#imagePreview {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px;
+    max-width: 50%;
+    display: none; /* Hidden by default */
+}
+
+.team-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* Ensure the sidebar stays fixed on the page */
+#filterSidebar {
+    position: sticky;
+    top: 80px; /* Adjust this value based on your header height */
+    z-index: 1000;
+}
+
+/* Adjust the height for better UX */
+.main-content-section {
+    padding-top: 100px;
+}
