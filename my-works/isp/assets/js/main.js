@@ -3,11 +3,9 @@ $(document).ready(function () {
         title: "Book an Appointment",
         placement: "top"
     });
-});
 
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+    $('[data-bs-toggle="tooltip"]').tooltip()
+});
 
 function previewImage(event) {
     const input = event.target;

@@ -20,20 +20,12 @@ body{
 }
 
 .details-list li {
-    display: contents; /* Allows items to be in the same grid structure */
+    display: contents;
 }
 
 .details-label {
     font-weight: bold;
-    white-space: nowrap; /* Prevents label text from wrapping */
-}
-
-.media img {
-    object-fit: cover;
-}
-
-.media-body h5 {
-    font-weight: bold;
+    white-space: nowrap;
 }
 
 #imagePreview {
@@ -42,7 +34,7 @@ body{
     margin-top: 10px;
     padding: 5px;
     max-width: 50%;
-    display: none; /* Hidden by default */
+    display: none;
 }
 
 .team-img {
@@ -54,11 +46,144 @@ body{
 /* Ensure the sidebar stays fixed on the page */
 #filterSidebar {
     position: sticky;
-    top: 80px; /* Adjust this value based on your header height */
+    top: 80px;
     z-index: 1000;
 }
 
 /* Adjust the height for better UX */
 .main-content-section {
     padding-top: 100px;
+}
+
+/* Custom styles for the review section */
+.review {
+    display: flex;
+    align-items: flex-start;
+}
+
+.review-img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.review .media-body {
+    flex-grow: 1;
+}
+
+/* Contact Us */
+.contact-section {
+    padding-top: 100px;
+}
+
+.contact-section h2 {
+    font-weight: bold;
+}
+
+.contact-section ul {
+    font-size: 1.1em;
+}
+
+.contact-section ul li {
+    margin-bottom: 10px;
+}
+
+.contact-section ul li i {
+    margin-right: 10px;
+    color: #007bff;
+}
+
+.contact-section iframe {
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.contact-section .form-control {
+    margin-bottom: 20px;
+}
+
+/* Login */
+.login-section {
+    padding-top: 100px;
+}
+
+.login-section h2 {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.login-section .form-control {
+    margin-bottom: 20px;
+}
+
+.login-section .btn-block {
+    width: 100%;
+}
+
+.login-section .text-center {
+    margin-top: 20px;
+}
+
+.login-section .text-center a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-section .text-center a:hover {
+    text-decoration: underline;
+}
+
+/* Privacy Policy */
+.privacy-policy-section {
+    padding-top: 100px;
+}
+
+.privacy-policy-section h2 {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.privacy-policy-section h3 {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.privacy-policy-section p, .privacy-policy-section ul {
+    margin-bottom: 20px;
+}
+
+.privacy-policy-section ul {
+    padding-left: 20px;
+}
+
+.privacy-policy-section ul li {
+    margin-bottom: 10px;
+}
+
+/* Terms and Condition */
+.terms-section {
+    padding-top: 100px;
+}
+
+.terms-section h2 {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.terms-section h3 {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.terms-section p, .terms-section ul {
+    margin-bottom: 20px;
+}
+
+.terms-section ul {
+    padding-left: 20px;
+}
+
+.terms-section ul li {
+    margin-bottom: 10px;
 }
