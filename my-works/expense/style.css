@@ -1,0 +1,89 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.expense-tracker {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 100%;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.balance {
+    margin-bottom: 20px;
+}
+
+#balance {
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+/* Align the list item content with Bootstrap classes */
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    font-size: 1.1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.list-group-item span {
+    font-weight: bold;
+    color: inherit;
+    text-align: right;
+    min-width: 150px; /* Increase this width to ensure large numbers align properly */
+    display: inline-block;
+}
+
+.list-group-item .delete-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.list-group-item .delete-btn:hover {
+    background: #c82333;
+}
+
+.list-group-item.plus span {
+    color: green;
+}
+
+.list-group-item.minus span {
+    color: red;
+}
+
+/* Limit history to 5 rows and enable scrolling if more */
+#list {
+    max-height: 350px; /* Adjust height for 5 rows */
+    overflow-y: auto;
+    padding: 0;
+}
+
+#list::-webkit-scrollbar {
+    width: 6px;
+}
+
+#list::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 10px;
+}
+
+#list::-webkit-scrollbar-track {
+    background-color: #f4f4f4;
+}

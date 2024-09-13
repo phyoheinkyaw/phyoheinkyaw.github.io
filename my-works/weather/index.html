@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="weather-app">
+    <h1 id="cityName">Weather App</h1>
+    <input type="text" id="city" placeholder="Enter city name">
+    <button id="getWeather">Get Weather</button>
+
+    <div id="weatherInfo" class="hidden">
+      <div id="icon-container">
+        <img id="weatherIcon" alt="Weather icon" class="hidden">
+      </div>
+
+      <div class="info">
+        <p><i class="fas fa-temperature-high"></i><span id="temperature"></span></p>
+        <p><i class="fas fa-tint"></i><span id="humidity"></span></p>
+        <p><i class="fas fa-wind"></i><span id="wind"></span></p>
+        <p><i class="fas fa-cloud"></i><span id="clouds"></span></p>
+        <p><i class="fas fa-compress-arrows-alt"></i><span id="pressure"></span></p>
+        <p><i class="fas fa-arrows-alt-v"></i><span id="seaLevel"></span></p>
+        <p><i class="fas fa-sun"></i><span id="sunrise"></span></p>
+        <p><i class="fas fa-moon"></i><span id="sunset"></span></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

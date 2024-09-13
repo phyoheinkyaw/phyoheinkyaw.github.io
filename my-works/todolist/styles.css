@@ -1,0 +1,145 @@
+/* Container styling to keep it centered */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4; /* Light mode background color */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .todo-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .theme-toggle button {
+    font-size: 1.2rem;
+    background-color: #333; /* Dark button for light mode */
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Dark mode for the body background */
+  body.dark-mode {
+    background-color: #1a1a1a; /* Full dark mode background */
+    color: #e0e0e0; /* Text color in dark mode */
+  }
+  
+  .dark-mode .todo-container {
+    background-color: #2b2b2b; /* Darker container background */
+    color: #fff;
+  }
+  
+  .dark-mode .theme-toggle button {
+    background-color: #f4f4f4; /* Light button for dark mode */
+    color: black;
+  }
+  
+  /* Styling the input box in dark mode */
+  input[type="text"] {
+    background-color: white;
+    color: black;
+    border: 1px solid #ced4da;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  input[type="text"]::placeholder {
+    color: #999; /* Placeholder color for light mode */
+  }
+  
+  .dark-mode input[type="text"] {
+    background-color: #333;
+    color: white;
+    border-color: #444;
+  }
+  
+  .dark-mode input[type="text"]::placeholder {
+    color: #ccc; /* Lighter placeholder color in dark mode */
+  }
+  
+  /* Set task list to be scrollable */
+  #task-list {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  /* Card styling with subtle box shadow */
+  .card {
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow */
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow on hover */
+  }
+  
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer; /* Enable pointer cursor to indicate action */
+  }
+  
+  .card-body.completed span {
+    text-decoration: line-through;
+    color: #999; /* Light mode completed task color */
+  }
+  
+  .dark-mode .card {
+    background-color: #3a3a3a;
+  }
+  
+  .dark-mode .card-body span {
+    color: #ddd; /* Light gray text color in dark mode */
+  }
+  
+  .dark-mode .card-body.completed span {
+    color: #888; /* Slightly darker gray for completed tasks in dark mode */
+  }
+  
+  /* Delete button styling */
+  .btn-danger {
+    background-color: red;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-danger:hover {
+    background-color: darkred;
+  }
+  
+  /* Dark mode for cards */
+  .dark-mode .card {
+    background-color: #3a3a3a;
+  }
+  
+  .dark-mode .btn-danger {
+    background-color: #e74c3c;
+  }
+  
+  .dark-mode .btn-danger:hover {
+    background-color: #c0392b;
+  }
+
+  .theme-toggle {
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1000;
+  }
+  
+  /* Responsive adjustments for mobile */
+  @media (max-width: 768px) {
+    .todo-container {
+      max-width: 90%;
+    }
+  }
