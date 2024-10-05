@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Clone with Dynamic Word Lengths</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #fafafa;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #stage {
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #hint {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #board {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tile {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #d3d3d3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .correct {
+            background-color: #6aaa64;
+            color: white;
+        }
+
+        .present {
+            background-color: #c9b458;
+            color: white;
+        }
+
+        .absent {
+            background-color: #787c7e;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <div id="stage">Stage: 1</div>
+        <div id="hint">Hint: Guess the word!</div>
+        <div id="board"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const board = document.getElementById("board");
+            const hintElement = document.getElementById("hint");
+            const stageElement = document.getElementById("stage");
+
+            let currentRow = 0;
+            let currentCol = 0;
+            let currentGuess = "";
+            let targetWord = "";
+            let wordLength = 5;
+
+            // Load stage from local storage or start at stage 1
+            let stage = parseInt(localStorage.getItem("wordleStage")) || 1;
+
+            function updateStageDisplay() {
+                stageElement.textContent = `Stage: ${stage}`;
+            }
+
+            function determineWordLength(stage) {
+                if (stage < 20) {
+                    return 5;
+                } else if (stage < 50) {
+                    return 6;
+                } else if (stage < 80) {
+                    return 7;
+                } else {
+                    return 8;
+                }
+            }
+
+            function initializeGame() {
+                // Determine the word length based on the current stage
+                wordLength = determineWordLength(stage);
+
+                // Fetch a random word from the API with the determined length
+                fetch(`https://random-word-api.herokuapp.com/word?number=1&length=${wordLength}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        targetWord = data[0].toUpperCase();
+                        console.log("Target Word:", targetWord); // Debugging: to see the target word
+
+                        // Reset the board and state variables
+                        board.innerHTML = "";
+                        currentRow = 0;
+                        currentCol = 0;
+                        currentGuess = "";
+
+                        // Update stage display
+                        updateStageDisplay();
+
+                        // Create the board (6 attempts, wordLength letters each)
+                        board.style.gridTemplateColumns = `repeat(${wordLength}, 50px)`;
+                        board.style.gridTemplateRows = `repeat(6, 50px)`;
+
+                        for (let i = 0; i < 6; i++) {
+                            for (let j = 0; j < wordLength; j++) {
+                                let tile = document.createElement("div");
+                                tile.classList.add("tile");
+                                tile.setAttribute("id", `tile-${i}-${j}`);
+                                board.appendChild(tile);
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Error fetching the word:", err);
+                        hintElement.textContent = "Error loading the word. Please refresh the page.";
+                    });
+            }
+
+            // Keyboard event listener
+            document.addEventListener("keydown", (event) => {
+                if ((event.key.length === 1 && event.key.match(/[a-z]/i)) && currentRow < 6) {
+                    // Accept only letters A-Z
+                    if (currentCol < wordLength) {
+                        let letter = event.key.toUpperCase();
+                        currentGuess += letter;
+                        let tile = document.getElementById(`tile-${currentRow}-${currentCol}`);
+                        tile.textContent = letter;
+                        currentCol++;
+                    }
+                } else if (event.key === "Backspace" && currentCol > 0) {
+                    // Handle backspace
+                    currentCol--;
+                    currentGuess = currentGuess.slice(0, -1);
+                    let tile = document.getElementById(`tile-${currentRow}-${currentCol}`);
+                    tile.textContent = "";
+                } else if (event.key === "Enter" && currentCol === wordLength) {
+                    // Handle enter key
+                    checkGuess();
+                }
+            });
+
+            function checkGuess() {
+                let correctLetters = 0;
+
+                for (let i = 0; i < wordLength; i++) {
+                    let tile = document.getElementById(`tile-${currentRow}-${i}`);
+                    let letter = currentGuess[i];
+                    if (targetWord[i] === letter) {
+                        tile.classList.add("correct");
+                        correctLetters++;
+                    } else if (targetWord.includes(letter)) {
+                        tile.classList.add("present");
+                    } else {
+                        tile.classList.add("absent");
+                    }
+                }
+
+                // Check if the user has guessed the word correctly
+                if (correctLetters === wordLength) {
+                    setTimeout(() => {
+                        alert("Congratulations, you guessed the word!");
+                        stage++;
+                        localStorage.setItem("wordleStage", stage);
+                        initializeGame();
+                    }, 100);
+                    return;
+                }
+
+                // Move to the next row if there are more attempts left
+                currentRow++;
+                currentCol = 0;
+                currentGuess = "";
+
+                if (currentRow === 6) {
+                    setTimeout(() => {
+                        alert(`Game over! The word was ${targetWord}`);
+                        initializeGame(); // Restart the current stage without incrementing
+                    }, 100);
+                }
+            }
+
+            // Start the first game
+            initializeGame();
+        });
+    </script>
+</body>
+
+</html>
