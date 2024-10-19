@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower Defense Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #fff;
+        }
+        canvas {
+            border: 2px solid #000;
+            background-color: #87CEEB; /* light blue to represent the map */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tower Defense Game</h1>
+    <canvas id="gameCanvas" width="800" height="500"></canvas>
+    <p>Click on the map to place towers. Enemies will follow the winding path.</p>
+    <p>Score: <span id="score">0</span></p>
+
+    <script>
+        // Setup Canvas
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+
+        // Game Variables
+        let towers = [];
+        let enemies = [];
+        let projectiles = [];
+        let score = 0;
+        let enemyPath = [
+            { x: 0, y: 250 },
+            { x: 200, y: 100 },
+            { x: 400, y: 300 },
+            { x: 600, y: 150 },
+            { x: 800, y: 400 }
+        ];
+        let spawnInterval = 2000; // Spawn an enemy every 2 seconds
+        let lastSpawnTime = 0;
+
+        // Tower Class
+        class Tower {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.range = 100;
+                this.cooldown = 1000; // Milliseconds between shots
+                this.lastShotTime = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = 'red';
+                ctx.fillRect(this.x - 10, this.y - 10, 20, 20);
+            }
+
+            shoot(enemy) {
+                if (Date.now() - this.lastShotTime >= this.cooldown) {
+                    projectiles.push(new Projectile(this.x, this.y, enemy));
+                    this.lastShotTime = Date.now();
+                }
+            }
+
+            findTarget() {
+                for (let enemy of enemies) {
+                    const dist = Math.sqrt((enemy.x - this.x) ** 2 + (enemy.y - this.y) ** 2);
+                    if (dist <= this.range) {
+                        this.shoot(enemy);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Enemy Class
+        class Enemy {
+            constructor() {
+                this.x = enemyPath[0].x;
+                this.y = enemyPath[0].y;
+                this.speed = 1;
+                this.health = 50;
+                this.pathIndex = 0;
+            }
+
+            update() {
+                if (this.pathIndex < enemyPath.length - 1) {
+                    const target = enemyPath[this.pathIndex + 1];
+                    const dx = target.x - this.x;
+                    const dy = target.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < this.speed) {
+                        this.pathIndex++;
+                    } else {
+                        this.x += (dx / distance) * this.speed;
+                        this.y += (dy / distance) * this.speed;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = 'green';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 10, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Draw Health
+                ctx.fillStyle = 'white';
+                ctx.font = '12px Arial';
+                ctx.fillText(this.health, this.x - 10, this.y - 15);
+            }
+        }
+
+        // Projectile Class
+        class Projectile {
+            constructor(x, y, target) {
+                this.x = x;
+                this.y = y;
+                this.target = target;
+                this.speed = 3;
+            }
+
+            update() {
+                const dx = this.target.x - this.x;
+                const dy = this.target.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < this.speed) {
+                    this.target.health -= 10; // Inflict damage
+                    this.markedForDeletion = true;
+
+                    // Update score if the enemy is defeated
+                    if (this.target.health <= 0) {
+                        score++;
+                        scoreElement.textContent = score;
+                    }
+                } else {
+                    this.x += (dx / distance) * this.speed;
+                    this.y += (dy / distance) * this.speed;
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = 'yellow';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Handle Tower Placement
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+            towers.push(new Tower(mouseX, mouseY));
+        });
+
+        // Game Loop
+        function gameLoop(timestamp) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Path
+            ctx.strokeStyle = 'yellow';
+            ctx.lineWidth = 5;
+            ctx.beginPath();
+            ctx.moveTo(enemyPath[0].x, enemyPath[0].y);
+            for (let i = 1; i < enemyPath.length; i++) {
+                ctx.lineTo(enemyPath[i].x, enemyPath[i].y);
+            }
+            ctx.stroke();
+
+            // Spawn Enemies
+            if (Date.now() - lastSpawnTime > spawnInterval) {
+                enemies.push(new Enemy());
+                lastSpawnTime = Date.now();
+            }
+
+            // Update and Draw Enemies
+            enemies = enemies.filter(enemy => enemy.health > 0); // Remove dead enemies
+            for (let enemy of enemies) {
+                enemy.update();
+                enemy.draw();
+            }
+
+            // Update and Draw Towers
+            for (let tower of towers) {
+                tower.draw();
+                tower.findTarget();
+            }
+
+            // Update and Draw Projectiles
+            projectiles = projectiles.filter(p => !p.markedForDeletion);
+            for (let projectile of projectiles) {
+                projectile.update();
+                projectile.draw();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start Game
+        requestAnimationFrame(gameLoop);
+    </script>
+
+</body>
+</html>
