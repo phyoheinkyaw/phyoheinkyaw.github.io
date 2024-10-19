@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+* {
+    font-family: "Roboto Slab", serif;
+}
+
+/* General Page Styles */
+body,
+html {
+    overflow-x: hidden;
+    height: 100%;
+    /* Set height for entire body and html */
+}
+
+/* Sidebar Styling */
+#sidebar {
+    width: 250px;
+    height: 100vh;
+    /* Full viewport height */
+    overflow-y: auto;
+    /* Hide scrollbar by default */
+    transition: all 0.3s ease-in-out;
+    background-color: #343a40;
+    /* Dark color for sidebar */
+    position: fixed;
+    /* Fix the position for independent scrolling */
+}
+
+/* Custom scrollbar styling for a cleaner look */
+#sidebar::-webkit-scrollbar {
+    width: 0;
+}
+
+#sidebar .components a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+    color: #ffffff;
+    /* White text */
+}
+
+#sidebar .components a:hover {
+    background-color: #495057;
+    /* Darker shade on hover */
+}
+
+/* Divider Styling */
+.sidebar-divider {
+    border: 1px solid #495057;
+    /* Slightly lighter border for subtle separation */
+    margin: 2px -10px;
+}
+
+/* Icons Styling */
+.nav-icon {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.dropdown-arrow {
+    font-size: 0.8rem;
+}
+
+/* Offcanvas Sidebar Styling for Mobile */
+#offcanvasSidebar {
+    width: 250px;
+    height: 100%;
+    /* Full height to make sure offcanvas also scrolls independently */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    background-color: #343a40;
+    /* Dark color for offcanvas sidebar */
+}
+
+#offcanvasSidebar .components a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    transition: background 0.3s ease-in-out;
+    color: #ffffff;
+    /* White text */
+}
+
+#offcanvasSidebar .components a:hover {
+    background-color: #495057;
+    /* Darker shade on hover */
+}
+
+/* Content Styling */
+#content {
+    transition: all 0.3s ease-in-out;
+    margin-left: 250px;
+    /* Default with sidebar */
+}
+
+/* Collapsed Sidebar Styling */
+#sidebar.collapsed {
+    margin-left: -250px;
+}
+
+#content.expanded {
+    margin-left: 0;
+    /* Expand to fill when sidebar is collapsed */
+}
+
+/* Hide fixed sidebar for small devices and show offcanvas */
+@media (max-width: 991px) {
+    #sidebar {
+        display: none;
+    }
+
+    #offcanvasSidebar {
+        display: block;
+    }
+
+    #content {
+        margin-left: 0 !important;
+    }
+}
+
+/* Notification and Profile Styling */
+.navbar .dropdown-menu {
+    min-width: 200px;
+}
+
+#notificationDropdown .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+}
+
+img.rounded-circle {
+    object-fit: cover;
+}

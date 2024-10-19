@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+* {
+    font-family: "Roboto Slab", serif;
+}
+
+.bg-navigation {
+    background: #080808;
+}
+
+.bg-header {
+    background: linear-gradient(to right, red, blue);
+}
+
+.card-notice {
+    max-height: 315px;
+}
+
+.notice-board {
+    max-height: 190px;
+    overflow: hidden;
+    padding: 5px;
+    background: #f2f2f2;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.marquee-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.marquee-list li {
+    margin-bottom: 10px;
+}
+
+.marquee-list li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    transition: all 0.4s ease;
+}
+
+.marquee-list li a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

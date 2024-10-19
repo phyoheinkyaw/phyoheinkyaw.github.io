@@ -24,84 +24,99 @@ if (!$result) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Notice Details - Student Result Management System</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap CSS (via CDN)-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <style>
-            .bg-header {
-                background: linear-gradient(to right, #0062E6, #33AEFF);
-            }
-            .card-custom {
-                border: none;
-                box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-                border-radius: 15px;
-                transition: transform 0.3s ease;
-                margin-bottom: 20px;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand fw-bold" href="index.php">SRMS - Student Result Management System</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="allnotice.php">All Notice</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<html>
 
-        <!-- Header section -->
-        <header class="py-5 bg-header text-white">
-            <div class="container text-center">
-                <h1 class="display-4 fw-bold">Notice Details</h1>
-                <p class="lead">View the details of the selected notice below.</p>
-            </div>
-        </header>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Result Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        type="text/css">
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+</head>
 
-        <!-- Notice Details Section -->
-        <section class="py-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="card card-custom p-4">
-                            <div class="card-body">
-                                <h3 class="card-title fw-bold"><?php echo htmlentities($result->noticeTitle); ?></h3>
-                                <p class="text-muted">Posted on: <?php echo htmlentities($result->postingDate); ?></p>
-                                <hr>
-                                <p class="card-text">
-                                    <?php echo nl2br(htmlentities($result->noticeDetails)); ?>
-                                </p>
-                            </div>
+<body>
+
+    <!-- Navigation Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-navigation">
+        <div class="container">
+            <a href="index.html" class="navbar-brand fw-bold">SRMS</a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="allnotice.php" class="nav-link">All Notice</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navigation End -->
+
+    <!-- Greeting Header Start -->
+    <header class="py-5 bg-header text-light">
+        <div class="container text-center">
+            <h2 class="display-6 mb-4">Notice Details</h2>
+            <p class="lead">View the details of the selected notice.</p>
+        </div>
+    </header>
+    <!-- Greeting Header End -->
+
+    <!-- Main Section Start -->
+    <section class="pt-5 pb-4">
+        <div class="container">
+            <nav class="align-self-center" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"><a href="allnotice.php">All Notices</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <?php echo htmlentities($result->noticeTitle); ?></li>
+                </ol>
+            </nav>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card shadow p-4">
+                        <div class="card-body">
+                            <h3 class="card-title fw-bold"><?php echo htmlentities($result->noticeTitle); ?></h3>
+                            <p class="text-muted">Posted on: <?php echo htmlentities($result->postingDate); ?></p>
+                            <hr />
+                            <p class="card-text" style="text-align: justify;">
+                                <?php echo html_entity_decode($result->noticeDetails); ?>
+                            </p>
                         </div>
-                        <div class="text-center mt-4">
-                            <a href="allnotice.php" class="btn btn-secondary">Back to Notices</a>
-                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="allnotice.php" class="btn btn-secondary">&larr; Back to Notices</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <!-- Main Section End -->
 
-        <!-- Footer section -->
-        <footer class="py-5 bg-dark">
-            <div class="container">
-                <p class="m-0 text-center text-white">&copy; Student Result Management System 2023</p>
+    <!-- Footer Start -->
+    <footer class="py-3 bg-navigation text-light">
+        <div class="container">
+            <div class="row align-items-center text-center">
+                <div class="col-md-6">
+                    <p class="m-0">&copy; 2024 Student Result Management System. All right reserved.</p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline mt-3">
+                        <li class="list-inline-item"><a href="">Facebook</a></li>
+                        <li class="list-inline-item"><a href="">Facebook</a></li>
+                        <li class="list-inline-item"><a href="">Facebook</a></li>
+                        <li class="list-inline-item"><a href="">Facebook</a></li>
+                    </ul>
+                </div>
             </div>
-        </footer>
+        </div>
+    </footer>
+    <!-- Footer End -->
 
-        <!-- Bootstrap Bundle JS (via CDN) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" type="text/javascript">
+    </script>
+</body>
+
 </html>
