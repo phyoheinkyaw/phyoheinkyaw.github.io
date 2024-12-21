@@ -9,7 +9,7 @@ if (!isset($_SESSION['admin_id'])) {
 require_once '../include/db_connection.php';
 
 // Fetch all ISPs from the database
-$query = "SELECT isp_id, isp_name, isp_contact_email, isp_contact_phone, isp_photo FROM isp ORDER BY isp_id ASC";
+$query = "SELECT isp_id, isp_name, isp_contact_email, isp_contact_phone, isp_photo, is_featured FROM isp ORDER BY isp_id ASC";
 $result = $conn->query($query);
 ?>
 
@@ -117,8 +117,7 @@ $result = $conn->query($query);
                                     <th>ID</th>
                                     <th>Photo</th>
                                     <th>ISP Name</th>
-                                    <!-- <th>Contact Email</th>
-                                    <th>Contact Phone</th> -->
+                                    <th>Is Featured?</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -136,8 +135,10 @@ $result = $conn->query($query);
                                         <?php endif; ?>
                                     </td>
                                     <td><?php echo htmlspecialchars($row['isp_name']); ?></td>
-                                    <!-- <td><?php echo htmlspecialchars($row['isp_contact_email']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['isp_contact_phone']); ?></td> -->
+                                    <td><button class="btn btn-warning btn-sm toggle-featured"
+                                            data-id="<?php echo $row['isp_id']; ?>"
+                                            data-featured="<?php echo $row['is_featured']; ?>"><?php echo $row['is_featured'] == 1 ? 'Yes' : 'No'; ?></button>
+                                    </td>
                                     <td>
                                         <button class="btn btn-info btn-sm view-isp"
                                             data-id="<?php echo $row['isp_id']; ?>">View</button>
@@ -425,6 +426,46 @@ $result = $conn->query($query);
                             console.log("An error occurred: " + error + "\n" + xhr
                                 .responseText);
                         }
+                    });
+                }
+            });
+        });
+
+        // Toggle Feature On or Off
+        $(document).on('click', '.toggle-featured', function() {
+            const ispId = $(this).data('id');
+            const isFeatured = $(this).data('featured');
+
+            $.ajax({
+                url: 'toggle_featured_isp.php', // Supporting PHP file
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    isp_id: ispId,
+                    is_featured: isFeatured === 1 ? 0 : 1 // Toggle the featured value
+                }),
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(() => location.reload(), 1600);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
                     });
                 }
             });

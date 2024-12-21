@@ -15,7 +15,7 @@ $result = $conn->query($sql);
 // Store ISPs in an array for later use
 $ispOptions = [];
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $ispOptions[] = $row;
     }
 } else {
@@ -31,7 +31,7 @@ $result = $conn->query($sql);
 // Store promotions in an array for later use
 $promotions = [];
 if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
+    while ($row = $result->fetch_assoc()) {
         $promotions[] = $row;
     }
 } else {
@@ -79,7 +79,7 @@ $conn->close();
                             <div class="mb-3">
                                 <label for="ispSelect" class="form-label">Select ISP</label>
                                 <select id="ispSelect" name="isp_id" class="form-control" required>
-                                    <?php foreach($ispOptions as $isp): ?>
+                                    <?php foreach ($ispOptions as $isp): ?>
                                     <option value="<?php echo $isp['isp_id']; ?>">
                                         <?php echo $isp['isp_name']; ?>
                                     </option>
@@ -109,19 +109,18 @@ $conn->close();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach($promotions as $promo): ?>
+                        <?php foreach ($promotions as $promo): ?>
                         <tr>
                             <td><?php echo $promo['promotion_id']; ?></td>
                             <td><?php echo $promo['isp_name']; ?></td>
                             <td><?php echo $promo['promotion_text']; ?></td>
                             <td>
-                                <button class="btn btn-primary btn-sm edit-isp"
-                                    data-id="<?php echo $row['isp_id']; ?>">Edit</button>
-                                <button class="btn btn-danger btn-sm delete-isp"
-                                    data-id="<?php echo $row['isp_id']; ?>">Delete</button>
+                                <button class="btn btn-primary btn-sm edit-promotion"
+                                    data-id="<?php echo $promo['promotion_id']; ?>">Edit</button>
+                                <button class="btn btn-danger btn-sm delete-promotion"
+                                    data-id="<?php echo $promo['promotion_id']; ?>">Delete</button>
                             </td>
                         </tr>
-                        </option>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -142,93 +141,154 @@ $conn->close();
     <script src="js/script.js" type="text/javascript"></script>
     <script>
     $(document).ready(function() {
-        let isEditing = false; // Track if we are in edit mode
+        let isEditing = false;
 
         // Initialize DataTable
         $('#promotionTable').DataTable();
 
-        // Handle Add/Edit Promotion Form Submission
+        // Edit button click event
+        $(document).on('click', '.edit-promotion', function() {
+            const promotionId = $(this).data('id');
+
+            // Fetch promotion details
+            $.ajax({
+                url: 'fetch_promotion.php',
+                method: 'GET',
+                data: {
+                    promotion_id: promotionId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $('#promoId').val(response.data.promotion_id);
+                        $('#ispSelect').val(response.data.isp_id);
+                        $('#promotionText').val(response.data.promotion_text);
+
+                        $('#formTitle').text('Edit Promotion');
+                        $('#submitButton').text('Update Promotion');
+                        $('#cancelButton').show();
+
+                        isEditing = true;
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
+                    });
+                }
+            });
+        });
+
+        // Cancel button click event
+        $('#cancelButton').on('click', function() {
+            $('#promotionForm')[0].reset();
+            $('#promoId').val('');
+            $('#formTitle').text('Add Promotion');
+            $('#submitButton').text('Add Promotion');
+            $('#cancelButton').hide();
+            isEditing = false;
+        });
+
+        $(document).on('click', '.delete-promotion', function() {
+            const promotionId = $(this).data('id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send request to delete the promotion
+                    $.ajax({
+                        url: 'delete_promotion.php',
+                        method: 'POST',
+                        data: {
+                            promotion_id: promotionId
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: response.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                                setTimeout(() => location.reload(), 1600);
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function() {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+        // Form submission for Add/Edit
         $('#promotionForm').on('submit', function(e) {
             e.preventDefault();
 
             const formData = new FormData(this);
-            const promoId = $('#promoId')
-                .val(); // Get Promotion ID from hidden field to determine whether to edit
+            const promoId = $('#promoId').val();
+
+            const url = isEditing ? 'edit_promotion.php' : 'add_promotion.php';
 
             if (isEditing) {
                 formData.append('promotion_id', promoId);
-                // Update Promotion (Edit Mode)
-                $.ajax({
-                    url: 'edit_isp.php',
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: response.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            setTimeout(() => location.reload(), 1600);
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: response.message,
-                                confirmButtonText: 'OK'
-                            });
-                        }
-                    },
-                    error: function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                });
-            } else {
-                // Add new Promotion (Add Mode)
-                $.ajax({
-                    url: 'add_promotion.php',
-                    method: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: response.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            setTimeout(() => location.reload(), 1600);
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error',
-                                text: response.message,
-                                confirmButtonText: 'OK'
-                            });
-                        }
-                    },
-                    error: function() {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                });
             }
-        });
 
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(() => location.reload(), 1600);
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!'
+                    });
+                }
+            });
+        });
     });
     </script>
 </body>

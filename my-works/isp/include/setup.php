@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS isp(
 	isp_contact_email varchar(100),
 	isp_contact_phone varchar(20),
 	isp_photo varchar(255),
+	is_featured tinyint(1) default 0,
 	isp_created_at timestamp default current_timestamp
 )";
 
@@ -99,7 +100,7 @@ CREATE TABLE IF NOT EXISTS appointment(
 	appointment_id int auto_increment primary key,
 	user_id int not null,
 	isp_id int not null,
-	admin_id int not null,
+	admin_id int default null,
 	appointment_phone_number varchar(20) not null,
 	appointment_address text not null,
 	appointment_date date not null,

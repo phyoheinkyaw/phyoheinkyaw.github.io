@@ -19,12 +19,12 @@
                         <a href="isp_promotions_management.php" class="sidebar-link"> Promotions</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Page 3</a>
+                        <a href="isp_plan_management.php" class="sidebar-link">Plans</a>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#appointmnet" data-bs-toggle="collapse"><i
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#appointment" data-bs-toggle="collapse"><i
                         class="fa-solid fa-file-lines"></i> Appointment Management</a>
                 <ul id="appointment" class="sidebar-dropdown collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
