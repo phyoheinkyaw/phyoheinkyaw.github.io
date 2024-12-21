@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $photo_dir = 'img/isp/';
+        $photo_dir = '../assets/img/isp/';
         
         // Create photo name: isp_name with underscores
         $sanitized_name = str_replace(' ', '_', strtolower($isp_name)); // Replace spaces with underscores and lowercase the name
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Store the relative path
-        $photo_path = 'img/isp/' . $photo_name;
+        // $photo_path = '../assets/img/isp/' . $photo_name;
     }
 
     // Insert into the database
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    $stmt->bind_param("ssssssssss", $isp_name, $isp_slogan, $isp_description, $isp_available_speeds, $isp_support_details, $isp_contract_length, $isp_availability, $isp_contact_email, $isp_contact_phone, $photo_path);
+    $stmt->bind_param("ssssssssss", $isp_name, $isp_slogan, $isp_description, $isp_available_speeds, $isp_support_details, $isp_contract_length, $isp_availability, $isp_contact_email, $isp_contact_phone, $photo_name);
 
     if ($stmt->execute()) {
         echo json_encode(["success" => true, "message" => "ISP added successfully."]);

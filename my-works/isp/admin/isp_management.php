@@ -129,8 +129,8 @@ $result = $conn->query($query);
                                     <td><?php echo htmlspecialchars($row['isp_id']); ?></td>
                                     <td>
                                         <?php if (!empty($row['isp_photo'])): ?>
-                                        <img src="<?php echo htmlspecialchars($row['isp_photo']); ?>" alt="ISP Photo"
-                                            style="height:100px;">
+                                        <img src="../assets/img/isp/<?php echo htmlspecialchars($row['isp_photo']); ?>"
+                                            alt="ISP Photo" style="height:100px;">
                                         <?php else: ?>
                                         <span>No photo</span>
                                         <?php endif; ?>
@@ -208,7 +208,7 @@ $result = $conn->query($query);
                                 <tr><th>Contact Email</th><td>${isp.isp_contact_email}</td></tr>
                                 <tr><th>Contact Phone</th><td>${isp.isp_contact_phone}</td></tr>
                                 <tr><th>Description</th><td>${isp.isp_description}</td></tr>
-                                <tr><th>Photo</th><td><img src="${isp.isp_photo}" style="max-height: 150px;" alt="ISP Photo"></td></tr>
+                                <tr><th>Photo</th><td><img src="../assets/img/isp/${isp.isp_photo}" style="max-height: 150px;" alt="ISP Photo"></td></tr>
                             </table>`,
                             showCloseButton: true,
                             confirmButtonText: 'Close'
@@ -351,7 +351,8 @@ $result = $conn->query($query);
 
                         // Show current photo if it exists
                         if (isp.isp_photo) {
-                            $('#ispPhotoPreview').attr('src', isp.isp_photo)
+                            $('#ispPhotoPreview').attr('src', '../assets/img/isp/' + isp
+                                    .isp_photo)
                                 .show(); // Display photo
                         } else {
                             $('#ispPhotoPreview').hide(); // Hide if no photo

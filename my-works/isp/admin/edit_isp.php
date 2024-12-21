@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
 
-        $photo_dir = 'img/isp/';
+        $photo_dir = '../assets/img/isp/';
 
         // Create a sanitized name for the photo
         $sanitized_name = str_replace(' ', '_', strtolower($isp_name)); 
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Update the ISP with the new photo path
         $stmt = $conn->prepare("UPDATE isp SET isp_name = ?, isp_slogan = ?, isp_description = ?, isp_available_speeds = ?, isp_support_details = ?, isp_contract_length = ?, isp_availability = ?, isp_contact_email = ?, isp_contact_phone = ?, isp_photo = ? WHERE isp_id = ?");
-        $stmt->bind_param("ssssssssssi", $isp_name, $isp_slogan, $isp_description, $isp_available_speeds, $isp_support_details, $isp_contract_length, $isp_availability, $isp_contact_email, $isp_contact_phone, $photo_path, $isp_id);
+        $stmt->bind_param("ssssssssssi", $isp_name, $isp_slogan, $isp_description, $isp_available_speeds, $isp_support_details, $isp_contract_length, $isp_availability, $isp_contact_email, $isp_contact_phone, $photo_name, $isp_id);
     } else {
         // Update the ISP without changing the photo
         $stmt = $conn->prepare("UPDATE isp SET isp_name = ?, isp_slogan = ?, isp_description = ?, isp_available_speeds = ?, isp_support_details = ?, isp_contract_length = ?, isp_availability = ?, isp_contact_email = ?, isp_contact_phone = ? WHERE isp_id = ?");
